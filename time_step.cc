@@ -1,6 +1,6 @@
 #include<cmath>
 int count_ants(int table_size, int **number_of_ants ){ // iterates through the table coordinates and sums the total number of ants at each coordinate
-    float total_ants = 0.0;
+    int total_ants = 0;
     for (int i=0;i<table_size;i++) {
         for (int j=0;j<table_size;j++) {
             total_ants += number_of_ants[i][j];

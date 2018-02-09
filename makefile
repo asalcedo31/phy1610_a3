@@ -2,7 +2,17 @@
 #set up flags
 CXX = g++
 CXXFLAGS = -std=c++11
+BOOST_LIB = -I /home/asalcedo/clibs/boost_1_66_0/
+BOOST_FLAG = -g
 
+unitTest: test_time_step
+	./test_time_step
+#link the time step test
+test_time_step: test_time_step.o initialization.o time_0.o time_step.o
+	${CXX} ${CXXFLAGS} ${BOOST_FLAG} ${BOOST_LIB}  test_time_step.o initialization.o time_step.o time_0.o -o test_time_step
+#compile the time step unit test module
+test_time_step.o: test_time_step.cc
+	${CXX} ${CXXFLAGS} ${BOOST_FLAG} ${BOOST_LIB} -c test_time_step.cc
 
 integratedTest: myAnts.out ants.out
 	diff myAnts.out ants.out
@@ -46,4 +56,4 @@ myAnts.o: myAnts.cc initialization.h time_0.h time_step.h deallocation.h
 
 #remove all compiled files
 clean:
-	rm -f myAnts -f ants *.o *.out
+	rm -f myAnts -f ants -f test_time_step -f integratedTest *.o *.out
