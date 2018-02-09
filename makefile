@@ -8,8 +8,8 @@ BOOST_FLAG = -g
 unitTest: test_time_step
 	./test_time_step
 #link the time step test
-test_time_step: test_time_step.o initialization.o time_0.o time_step.o
-	${CXX} ${CXXFLAGS} ${BOOST_FLAG} ${BOOST_LIB}  test_time_step.o initialization.o time_step.o time_0.o -o test_time_step
+test_time_step: test_time_step.o initialization.o time_0.o time_step.o deallocation.o
+	${CXX} ${CXXFLAGS} ${BOOST_FLAG} ${BOOST_LIB}  test_time_step.o initialization.o time_step.o deallocation.o time_0.o -o test_time_step
 #compile the time step unit test module
 test_time_step.o: test_time_step.cc
 	${CXX} ${CXXFLAGS} ${BOOST_FLAG} ${BOOST_LIB} -c test_time_step.cc
