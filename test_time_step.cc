@@ -3,7 +3,7 @@
 #include "time_0.h"
 #include "deallocation.h"
 #define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE Hello
+#define BOOST_TEST_MODULE TestTimeStep
 #include <boost/test/included/unit_test.hpp>
 
 // set up the objects the test functions will need 
@@ -64,5 +64,23 @@ BOOST_AUTO_TEST_CASE(moveAntsNotMoving)
     }
 	BOOST_CHECK(diff == true); // make sure the arrays have at least one value that's different 
 }
+
+BOOST_AUTO_TEST_CASE(updateRight)
+{
+	move_ants(table_size, crawl_direction, new_number_of_ants, number_of_ants); // move ants according to the crawl direction at that coordinate
+	update_ant_arrays(table_size, new_number_of_ants, number_of_ants); // update the arrays
+	bool diff = false; // assume the arrays are identical
+	int i = 0;
+    while (i<table_size && diff == false) {  //iterates through table coordinates until it finds a cell where the values are different
+        for (int j=0;j<table_size;j++) {
+        	if(new_number_of_ants[i][j] != number_of_ants[i][j]){ // check the value of a given position in the old and new array
+        		diff = true; // check if different 
+        	}
+        }
+        i++;
+    }
+	BOOST_CHECK(diff == false); // make sure the old and new arrays are identical
+}
+
 
 BOOST_AUTO_TEST_SUITE_END( )
